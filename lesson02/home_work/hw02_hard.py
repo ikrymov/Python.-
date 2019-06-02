@@ -1,10 +1,19 @@
+__author__ = 'Крымов Иван'
+
 # Задание-1: уравнение прямой вида y = kx + b задано в виде строки.
 # Определить координату y точки с заданной координатой x.
 
 equation = 'y = -12x + 11111140.2121'
 x = 2.5
+
 # вычислите и выведите y
 
+new_equation = equation.split(' ')
+print('Необходимо решить уравнение: ', equation, ' при Х = ', x)
+kx = int(new_equation[2][:-1]) * x
+b = float(new_equation[-1])
+answer = format(float(kx + b), '.2f')
+print("При X = ", x, " Y = ", answer)
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
 # Проверить, корректно ли введена дата.
@@ -17,13 +26,23 @@ x = 2.5
 #  (т.е. 2 символа для дня, 2 - для месяца, 4 - для года)
 
 # Пример корректной даты
+
+print()
 date = '01.11.1985'
 
 # Примеры некорректных дат
-date = '01.22.1001'
-date = '1.12.1001'
-date = '-2.10.3001'
 
+date1 = '01.22.1001'
+date2 = '1.12.1001'
+date3 = '-2.10.3001'
+
+new_date = date3.split('.')
+
+if (int(new_date[0]) >= 1 and int(new_date[0]) <= 31) and (int(new_date[1]) >= 1 and int(new_date[1]) <= 12) and (
+        int(new_date[0]) > 0 and int(new_date[0]) <= 31):
+    print('Дата введена корректно!')
+else:
+    print('Дата введена с ошибкой.')
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
 #
@@ -54,3 +73,35 @@ date = '-2.10.3001'
 #
 # Вход: 11
 # Выход: 5 3
+
+print()
+room = 11
+
+if room > 0 and room <= 2000000000:
+    loop_index = 1
+    floor_index = 1
+    room_index = 1
+
+    while room_index <= room:
+        print("******************************************************")
+
+        for _ in range(loop_index):
+            new_floor = []
+
+            for x in range(loop_index):
+                new_floor.append(room_index)
+                room_index += 1
+
+            print(f'Этаж №{floor_index}, содержит {loop_index} комнат(-ы): {new_floor}')
+
+            if room in new_floor:
+                room_position = new_floor.index(room) + 1
+                print()
+                print(f'Комната №{room} была найдена на этаже №{floor_index} и это {room_position} комната слева.')
+                break
+
+            floor_index += 1
+
+        loop_index += 1
+else:
+    print('Неправильный номер комнаты.')
