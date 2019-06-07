@@ -1,3 +1,4 @@
+__author__ = 'Крымов Иван'
 # Задание-1:
 # Напишите функцию, возвращающую ряд Фибоначчи с n-элемента до m-элемента.
 # Первыми элементами ряда считать цифры 1 1
@@ -26,7 +27,7 @@ print(fibonacci(1, 6))
 
 def sort_to_max(origin_list):
     pass
-    
+
     sorted_list = []
     for y in origin_list:
         sorted_list.append(min(origin_list))
