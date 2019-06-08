@@ -70,3 +70,60 @@ print('Произведение %s и индекс %s' % (str(max_product), str(
 # каждое число от 1 до 8 — координаты 8 ферзей.
 # Если ферзи не бьют друг друга, выведите слово NO, иначе выведите YES.
 
+def add_matrix(matrix, vhod):
+    for v in vhod:
+        matrix[v[0] - 1][v[1] - 1] = 1
+    return matrix
+
+def search_chek_row(matrix):
+    result = '0'
+    n = len(matrix)
+    for offset in range(n):
+        sum_row1 = sum(matrix[offset])
+        if sum_row1 > 1:
+            result = "YES"
+            return result
+        else:
+            result = "NO"
+            continue
+
+    for i in range(n):
+        col_sum = sum([matrix[col][i] for col in range(n)])
+        if col_sum > 1:
+            result = "YES"
+            return result
+        else:
+            result = "NO"
+            continue
+    return result
+
+
+def searh_check_diag(matrix):
+    n = len(matrix)
+    sum1 = 0
+    sum2 = 0
+    for offset in range(-n + 1, n):
+        diag1 = [row[i + offset] for i, row in enumerate(zip(*matrix)) if 0 <= i + offset < len(row)]
+        diag2 = [row[n - offset - i - 1] for i, row in enumerate(zip(*matrix)) if 0 <= n - offset - i - 1 < len(row)]
+        sum1 += sum(diag1)
+        sum2 += sum(diag2)
+        sum_diag1 = sum(diag1)
+        sum_diag2 = sum(diag2)
+        result = 'YES' if sum_diag1 > 1 or sum_diag2 > 1 else 'NO'
+        if result == 'YES':
+            return
+        else:
+            continue
+
+    result = 'YES' if sum1 > 1 or sum2 > 1 else 'NO'
+    return result
+
+
+matrix = np.zeros((8, 8))
+vhod = [[1, 2], [8, 5], [4, 1], [2, 1], [4, 3], [7, 1], [8, 2], [1, 1]]
+matrix = add_matrix(matrix, vhod)
+search_mate_row = search_chek_row(matrix)
+search_mate_diag = searh_check_diag(matrix)
+result = search_mate_row if search_mate_row == "YES" else search_mate_diag
+print()
+print(result)
