@@ -1,10 +1,15 @@
+__author__ = 'Крымов Иван'
+
+import numpy as np
+import re
+
 # Задание-1:
 # Матрицы в питоне реализуются в виде вложенных списков:
 # Пример. Дано:
 matrix = [[1, 0, 8],
           [3, 4, 1],
           [0, 4, 2]]
-          
+
 # Выполнить поворот (транспонирование) матрицы
 # Пример. Результат:
 # matrix_rotate = [[1, 3, 0],
@@ -12,6 +17,10 @@ matrix = [[1, 0, 8],
 #                  [8, 1, 2]]
 
 # Суть сложности hard: Решите задачу в одну строку
+
+print(matrix)
+ls = np.transpose(matrix)
+print(ls)
 
 # Задание-2:
 # Найдите наибольшее произведение пяти последовательных цифр в 1000-значном числе.
@@ -39,6 +48,19 @@ number = """
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"""
 
+def list_of_five_numbers(string):
+    patern = '(?=([0-9]{5}))'
+    result = re.findall(patern, string)
+    return result
+def product(string):
+    result = 1
+    for i in range(len(string)):
+        result *= int(string[i])
+    return result
+product_list = [product(i) for i in list_of_five_numbers(number)]
+max_product = max(product_list)
+print()
+print('Произведение %s и индекс %s' % (str(max_product), str(product_list.index(max_product))))
 
 # Задание-3 (Ферзи):
 # Известно, что на доске 8×8 можно расставить 8 ферзей так, чтобы они не били
@@ -47,3 +69,4 @@ number = """
 # Программа получает на вход восемь пар чисел,
 # каждое число от 1 до 8 — координаты 8 ферзей.
 # Если ферзи не бьют друг друга, выведите слово NO, иначе выведите YES.
+
