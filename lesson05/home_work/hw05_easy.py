@@ -12,34 +12,51 @@ import sys
 print('*' * 40)
 print('Ваща текущая директория {}'.format(os.getcwd()))
 print(f'Содержимое текущей папки: {os.listdir()}')
-try:
-    for num in range(9):
-        print(f'Создана новая директория: dir_{num + 1}')
-        os.mkdir('dir_{}'.format(num + 1))
-except FileExistsError:
-    print(f'Невозможно создать папку dir_{num + 1}, так как он уже существует')
-print(f'Содержимое текущей папки: {os.listdir()}')
-try:
-    for num in range(9):
-        print(f'Удалена директория: dir_{num + 1}')
-        os.rmdir('dir_{}'.format(num + 1))
-except FileNotFoundError:
-    print(f'Невозможно удалить папку dir_{num + 1}, так как она не существует')
-print('*' * 40)
-print(f'Содержимое текущей папки: {os.listdir()}')
+
+
+def makedir():
+    try:
+        for num in range(9):
+            print(f'Создана новая директория: dir_{num + 1}')
+            os.mkdir('dir_{}'.format(num + 1))
+    except FileExistsError:
+        print(f'Невозможно создать папку dir_{num + 1}, так как он уже существует')
+    print(f'Содержимое текущей папки: {os.listdir()}')
+
+
+def removedir():
+    try:
+        for num in range(9):
+            print(f'Удалена директория: dir_{num + 1}')
+            os.rmdir('dir_{}'.format(num + 1))
+    except FileNotFoundError:
+        print(f'Невозможно удалить папку dir_{num + 1}, так как она не существует')
+    print('*' * 40)
+    print(f'Содержимое текущей папки: {os.listdir()}')
+
 
 # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
+
+def currentdir():
+    print(f'Содержимое текущей папки: {os.listdir()}')
+
 
 # Данная задача реализована в задаче №1 и 3
 
 # Задача-3:
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
 
+def copy_files():
+    print('*' * 40)
+    print(f'Текущая папка: {sys.argv}, исходный файл для копирования: {os.path.basename(sys.argv[0])}')
+    name = os.path.basename(sys.argv[0])
+    copy = 'copy_' + name
+    shutil.copy(name, copy)
+    print(f'Содержимое текущей папки: {os.listdir()}')
 
-print('*' * 40)
-print(f'Текущая папка: {sys.argv}, исходный файл для копирования: {os.path.basename(sys.argv[0])}')
-name = os.path.basename(sys.argv[0])
-copy = 'copy_' + name
-shutil.copy(name, copy)
-print(f'Содержимое текущей папки: {os.listdir()}')
+
+makedir()
+removedir()
+currentdir()
+copy_files()
