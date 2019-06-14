@@ -1,3 +1,9 @@
+__author__ = 'Крымов Иван'
+
+import os
+from easy import makedir, removedir, currentdir, changedir
+
+
 # Задача-1:
 # Напишите небольшую консольную утилиту,
 # позволяющую работать с папками текущей директории.
@@ -13,3 +19,34 @@
 # Для решения данной задачи используйте алгоритмы из задания easy,
 # оформленные в виде соответствующих функций,
 # и импортированные в данный файл из easy.py
+
+def main():
+    while True:
+        print('''1 Перейти в папку
+2 Просмотреть содержимое текущей папки
+3 Удалить папку
+4 Создать папку
+q Выход''')
+        task = input()
+
+        if task == 'q':
+            print('goodbye')
+            break
+
+        elif task == '1':
+            dirname = input('Введите название папки для перехода: ')
+            changedir(dirname)
+
+        elif task == '2':
+            currentdir()
+
+        elif task == '3':
+            dirname = input('Введите название папки, которую необходимо удалить: ')
+            removedir(dirname)
+
+        elif task == '4':
+            dirname = input('Введите название новой папки: ')
+            makedir(dirname)
+
+
+main()
